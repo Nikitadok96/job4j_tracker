@@ -26,7 +26,7 @@ public class Library {
         System.out.println("Output only a book named Clean code");
         for (int i = 0; i < books.length; i++) {
             Book newBook = books[i];
-            if (newBook.getName().equals("Clean code")) {
+            if ("Clean code".equals(newBook.getName())) {
                 System.out.println(newBook.getName() + " has " + newBook.getNumberPages() + " pages");
             }
 
