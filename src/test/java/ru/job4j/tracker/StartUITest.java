@@ -103,7 +103,6 @@ class StartUITest {
         Output output = new StubOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("New Item 1"));
-        Item newItem = new Item(1, "New Item 1");
         Input in = new StubInput(
                 new String[] {"0", "1"}
         );
@@ -118,7 +117,7 @@ class StartUITest {
                         + "0. Show all Item" + ln
                         + "1. Exit" + ln
                         + "=== Show all items ===" + ln
-                        + newItem.toString() + ln
+                        + item + ln
                         + "Menu." + ln
                         + "0. Show all Item" + ln
                         + "1. Exit" + ln
@@ -131,7 +130,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Set order"));
         Input in = new StubInput(
-                new String[] {"0", "Set order", "1"}
+                new String[] {"0", item.getName(), "1"}
         );
         UserAction[] userAction = new UserAction[] {
                 new FindByNameAction(output),
@@ -143,7 +142,7 @@ class StartUITest {
                 "Menu." + ln
                         + "0. Find Items by name" + ln
                         + "1. Exit" + ln
-                        + item.toString() + ln
+                        + item + ln
                         + "Menu." + ln
                         + "0. Find Items by name" + ln
                         + "1. Exit" + ln
@@ -168,7 +167,7 @@ class StartUITest {
                 "Menu." + ln
                         + "0. Find Item by id" + ln
                         + "1. Exit" + ln
-                        + item.toString() + ln
+                        + item + ln
                         + "Menu." + ln
                         + "0. Find Item by id" + ln
                         + "1. Exit" + ln
