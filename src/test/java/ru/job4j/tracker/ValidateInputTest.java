@@ -34,23 +34,10 @@ class ValidateInputTest {
                 new String[] {"0", "1"}
         );
         Input input = new ValidateInput(out, in);
-        Tracker tracker = new Tracker();
-        UserAction[] actions = new UserAction[] {
-                new ShowAction(out),
-                new Exit(out)
-        };
-        new StartUI(out).init(input, tracker, actions);
-        String ln = System.lineSeparator();
-        assertThat(out.toString()).isEqualTo(
-                "Menu." + ln
-                        + "0. Show all Item" + ln
-                        + "1. Exit" + ln
-                        + "=== Show all items ===" + ln
-                        + "Хранилище еще не содержит заявок" + ln
-                        + "Menu." + ln
-                        + "0. Show all Item" + ln
-                        + "1. Exit" + ln
-        );
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected).isEqualTo(0);
+        selected = input.askInt("Enter menu:");
+        assertThat(selected).isEqualTo(1);
     }
 
     @Test
