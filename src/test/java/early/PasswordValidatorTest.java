@@ -1,6 +1,8 @@
 package early;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.early.PasswordValidator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
