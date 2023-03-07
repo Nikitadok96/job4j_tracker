@@ -19,54 +19,39 @@ public class PasswordValidator {
 
     private static void charValidate(String password) {
         char[] array = password.toCharArray();
-        if (!upperCaseCheck(array)) {
+        boolean isUpperCaseValid = false;
+        boolean isLowerCaseValid = false;
+        boolean isDigitValid = false;
+        boolean isSpecialSymbol = false;
+        for (char ch : array) {
+            if (Character.isUpperCase(ch)) {
+                isUpperCaseValid = true;
+            }
+            if (Character.isLowerCase(ch)) {
+                isLowerCaseValid = true;
+            }
+            if (Character.isDigit(ch)) {
+                isDigitValid = true;
+            }
+            if (!Character.isLetterOrDigit(ch)) {
+                isSpecialSymbol = true;
+            }
+            if (isUpperCaseValid && isLowerCaseValid && isDigitValid && isSpecialSymbol) {
+                break;
+            }
+        }
+        if (!isUpperCaseValid) {
             throw new IllegalArgumentException("Password should contain at least one uppercase letter");
         }
-        if (!lowerCaseCheck(array)) {
+        if (!isLowerCaseValid) {
             throw new IllegalArgumentException("Password should contain at least one lowercase letter");
         }
-        if (!digitCheck(array)) {
+        if (!isDigitValid) {
             throw new IllegalArgumentException("Password should contain at least one figure");
         }
-        if (!specialSymbolCheck(array)) {
+        if (!isSpecialSymbol) {
             throw new IllegalArgumentException("Password should contain at least one special symbol");
         }
-    }
-
-    private static boolean upperCaseCheck(char[] password) {
-        for (char ch : password) {
-            if (Character.isUpperCase(ch)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean lowerCaseCheck(char[] password) {
-        for (char ch : password) {
-            if (Character.isLowerCase(ch)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean digitCheck(char[] password) {
-        for (char ch : password) {
-            if (Character.isDigit(ch)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean specialSymbolCheck(char[] password) {
-        for (char ch : password) {
-            if (!Character.isLetterOrDigit(ch)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static boolean substringsCheck(String password) {
