@@ -7,11 +7,10 @@ import java.util.List;
 public class Tracker {
     private final List<Item> items = new ArrayList<>();
     private int ids = 1;
-    private int size = 0;
 
     public Item add(Item item) {
         item.setId(ids++);
-        items.add(size++, item);
+        items.add(item);
         return item;
     }
 
@@ -19,17 +18,14 @@ public class Tracker {
         return List.copyOf(items);
     }
 
-    public Item[] findByName(String key) {
-        Item[] rsl = new Item[size];
-        int counter = 0;
-        for (int i = 0; i < size; i++) {
-            Item item = items.get(i);
+    public  List<Item> findByName(String key) {
+        List<Item> rsl = new ArrayList<>();
+        for (Item item : items) {
             if (item.getName().equals(key)) {
-                rsl[counter] = item;
-                counter++;
+                rsl.add(item);
             }
         }
-        return Arrays.copyOf(rsl, counter);
+        return rsl;
     }
 
     public Item findById(int id) {
@@ -39,9 +35,9 @@ public class Tracker {
 
     private int indexOf(int id) {
         int index = -1;
-        for (int i = 0; i < size; i++) {
-            if (items.get(i).getId() == id) {
-                index = i;
+        for (Item item : items) {
+            if (item.getId() == id) {
+                index = items.indexOf(item);
                 break;
             }
         }
@@ -53,7 +49,7 @@ public class Tracker {
         boolean rsl = index != -1;
         if (rsl) {
             item.setId(id);
-            items.add(index, item);
+            items.set(index, item);
         }
         return rsl;
     }
@@ -62,8 +58,7 @@ public class Tracker {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            items.set(size - 1, null);
-            size--;
+            items.remove(index);
         }
         return rsl;
     }
