@@ -2,10 +2,11 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.assertj.core.api.Assertions.assertThatIterable;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -108,5 +109,41 @@ public class TrackerTest {
         boolean result = tracker.delete(1000);
         assertThat(tracker.findById(item.getId()).getName()).isEqualTo("Bug");
         assertThat(result).isFalse();
+    }
+
+    @Test
+    public void whenSortAscByName() {
+        List<Item> items = Arrays.asList(
+                new Item("Phone"),
+                new Item("Book"),
+                new Item("Milk"),
+                new Item("Alphabet")
+        );
+        List<Item> expected = Arrays.asList(
+                new Item("Alphabet"),
+                new Item("Book"),
+                new Item("Milk"),
+                new Item("Phone")
+        );
+        items.sort(new ItemAscByName());
+        assertThat(items.toString()).isEqualTo(expected.toString());
+    }
+
+    @Test
+    public void whenSortDescByName() {
+        List<Item> items = Arrays.asList(
+                new Item("Phone"),
+                new Item("Book"),
+                new Item("Milk"),
+                new Item("Alphabet")
+        );
+        List<Item> expected = Arrays.asList(
+                new Item("Phone"),
+                new Item("Milk"),
+                new Item("Book"),
+                new Item("Alphabet")
+        );
+        items.sort(new ItemDescByName());
+        assertThat(items.toString()).isEqualTo(expected.toString());
     }
 }
