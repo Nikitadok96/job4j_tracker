@@ -25,8 +25,8 @@ class FunctionCalculatorTest {
     @Test
     public void whenIndicativeFunctionThenIndicativeResults() {
         FunctionCalculator functionCalculator = new FunctionCalculator();
-        List<Double> result = functionCalculator.diapason(2, 6, x -> x * x);
-        List<Double> expected = Arrays.asList(4D, 9D, 16D, 25D);
+        List<Double> result = functionCalculator.diapason(2, 6, x -> Math.pow(2, x));
+        List<Double> expected = Arrays.asList(4D, 8D, 16D, 32D);
         assertThat(result).containsAll(expected);
     }
 }
