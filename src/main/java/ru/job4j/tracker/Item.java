@@ -50,4 +50,9 @@ public class Item {
     public LocalDateTime getCreated() {
         return created;
     }
+
+    public void setCreated(LocalDateTime time) {
+        this.created = time;
+    }
+
 }

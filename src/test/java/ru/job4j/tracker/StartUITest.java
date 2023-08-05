@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +14,7 @@ class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = Arrays.asList(new CreateAction(output), new Exit(output));
         new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findAll().get(0).getName()).isEqualTo("Item name");
@@ -23,7 +22,7 @@ class StartUITest {
 
     @Test
     public void whenReplaceItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Output output = new StubOutput();
         Item item = tracker.add(new Item("Replaced item"));
         String id = String.valueOf(item.getId());
@@ -39,7 +38,7 @@ class StartUITest {
     @Test
     public void whenDeleteItem() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Deleted item"));
         String id = String.valueOf(item.getId());
         Input in = new StubInput(
@@ -56,7 +55,7 @@ class StartUITest {
         Input in = new StubInput(
                 new String[] {"0"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(new Exit(out));
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString()).isEqualTo(
@@ -68,7 +67,7 @@ class StartUITest {
     @Test
     public void whenReplaceItemTestOutputIsSuccessfully() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         String replaceName = "New Test Name";
         Input in = new StubInput(
@@ -92,7 +91,7 @@ class StartUITest {
     @Test
     public void whenFindAllItemTestOutputIsIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("New Item 1"));
         Input in = new StubInput(
                 new String[] {"0", "1"}
@@ -115,7 +114,7 @@ class StartUITest {
     @Test
     public void whenFindByNameItemTestOutputIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Set order"));
         Input in = new StubInput(
                 new String[] {"0", item.getName(), "1"}
@@ -137,7 +136,7 @@ class StartUITest {
     @Test
     public void whenFindByIdTestOutputIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Test Item 1"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
@@ -162,7 +161,7 @@ class StartUITest {
         Input in = new StubInput(
                 new String[] {"1", "0"}
         );
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(new Exit(out));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
